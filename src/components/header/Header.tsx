@@ -3,7 +3,6 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import styles from './Header.module.scss';
-import { sliderUnstyledClasses } from '@mui/material';
 
 const Header: React.FC = () => {
   return (
@@ -11,7 +10,7 @@ const Header: React.FC = () => {
       <AppBar position="static" className={styles.app_bar}>
         <Toolbar className={styles.tool_bar}>
           <Typography variant="h6" className={styles.title}>
-            Redux Took Kit
+            Redux TookKit Todo
           </Typography>
         </Toolbar>
       </AppBar>
