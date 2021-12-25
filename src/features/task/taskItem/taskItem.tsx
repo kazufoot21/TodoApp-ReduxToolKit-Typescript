@@ -4,7 +4,7 @@ import EventIcon from '@mui/icons-material/Event';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import styles from './taskItem.module.scss';
+import styles from './TaskItem.module.scss';
 
 interface PropTypes {
   task: {
@@ -13,7 +13,7 @@ interface PropTypes {
     completed: boolean;
   };
 }
-const taskItem: React.FC<PropTypes> = (props) => {
+const TaskItem: React.FC<PropTypes> = (props) => {
   const { task } = props;
   return (
     <div className={styles.root}>
@@ -50,4 +50,4 @@ const taskItem: React.FC<PropTypes> = (props) => {
   );
 };
 
-export default taskItem;
+export default TaskItem;
