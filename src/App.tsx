@@ -4,8 +4,10 @@ import Header from './components/header/Header';
 
 const App: React.FC = () => {
   return (
-    <div>
-      <Header />
+    <div className={styles.root}>
+      <div className={styles.wrapper}>
+        <Header />
+      </div>
     </div>
   );
 };

@@ -3,14 +3,15 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import styles from './Header.module.scss';
+import { sliderUnstyledClasses } from '@mui/material';
 
 const Header: React.FC = () => {
   return (
     <div className={styles.root}>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar position="static" className={styles.app_bar}>
+        <Toolbar className={styles.tool_bar}>
           <Typography variant="h6" className={styles.title}>
-            News
+            Redux Took Kit
           </Typography>
         </Toolbar>
       </AppBar>
