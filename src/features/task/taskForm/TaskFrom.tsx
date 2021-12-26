@@ -1,17 +1,20 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
 
 import styles from './TaskForm.module.scss';
+import { createTask } from '../taskSlice';
 
 type Inputs = {
   taskTitle: string;
 };
 
 const TaskFrom: React.FC = () => {
+  const dispatch = useDispatch();
   const { register, handleSubmit, reset } = useForm();
   const handleCreate = (data: Inputs) => {
-    console.log(data);
+    dispatch(createTask(data.taskTitle));
     reset();
   };
   return (
