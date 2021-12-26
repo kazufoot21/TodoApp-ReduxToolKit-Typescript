@@ -1,3 +1,4 @@
+import { StarTwoTone } from '@mui/icons-material';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 // import { fetchCount } from './counterAPI';
@@ -51,6 +52,11 @@ export const taskSlice = createSlice({
       state.tasks = [newTask, ...state.tasks];
     },
 
+    //どのタスクを選択しているか管理
+    selectTask: (state, action) => {
+      state.selectedTask = action.payload;
+    },
+
     //Modalを開くか閉じるかのフラグの管理
     handleModalOpen: (state, action) => {
       state.isModalOpen = action.payload;
@@ -86,15 +92,18 @@ export const taskSlice = createSlice({
   // },
 });
 
-export const { createTask, handleModalOpen } = taskSlice.actions;
+export const { createTask, selectTask, handleModalOpen } = taskSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectTask = (state: RootState): TaskState['tasks'] =>
+export const selectTasks = (state: RootState): TaskState['tasks'] =>
   state.task.tasks;
 export const selectIsModalOpen = (state: RootState): TaskState['isModalOpen'] =>
   state.task.isModalOpen;
+export const selectSelectedTask = (
+  state: RootState
+): TaskState['selectedTask'] => state.task.selectedTask;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

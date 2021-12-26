@@ -1,10 +1,10 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
 
 import styles from './TaskForm.module.scss';
-import { createTask, handleModalOpen } from '../taskSlice';
+import { createTask, handleModalOpen, selectSelectedTask } from '../taskSlice';
 
 type Inputs = {
   taskTitle: string;
@@ -17,6 +17,7 @@ type ProTypes = {
 const TaskFrom: React.FC<ProTypes> = (props) => {
   const { edit } = props;
   const dispatch = useDispatch();
+  const selectedTask = useSelector(selectSelectedTask);
   const { register, handleSubmit, reset } = useForm();
   const handleCreate = (data: Inputs) => {
     dispatch(createTask(data.taskTitle));
@@ -35,7 +36,7 @@ const TaskFrom: React.FC<ProTypes> = (props) => {
         <TextField
           id="outlined-basic"
           label={edit ? 'Edit Task' : 'New Task'}
-          defaultValue={edit ? 'default value' : ''}
+          defaultValue={edit ? selectedTask.title : ''}
           variant="outlined"
           // inputRef={register}
           {...register('taskTitle')}

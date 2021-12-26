@@ -8,7 +8,7 @@ import Modal from '@mui/material/Modal';
 
 import styles from './taskItem.module.scss';
 import TaskFrom from '../taskForm/TaskFrom';
-import { selectIsModalOpen, handleModalOpen } from '../taskSlice';
+import { selectIsModalOpen, handleModalOpen, selectTask } from '../taskSlice';
 
 interface PropTypes {
   task: {
@@ -21,7 +21,11 @@ const TaskItem: React.FC<PropTypes> = (props) => {
   const isModalOpen = useSelector(selectIsModalOpen);
   const dispatch = useDispatch();
   // const [open, setOpen] = React.useState(false);
-  const handleOpen = () => dispatch(handleModalOpen(true));
+  const handleOpen = () => {
+    dispatch(selectTask(task));
+    dispatch(handleModalOpen(true));
+  };
+
   const handleClose = () => dispatch(handleModalOpen(false));
   const { task } = props;
 
