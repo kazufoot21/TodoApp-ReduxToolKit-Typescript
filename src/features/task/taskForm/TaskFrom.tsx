@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
 
 import styles from './TaskForm.module.scss';
-import { createTask } from '../taskSlice';
+import { createTask, handleModalOpen } from '../taskSlice';
 
 type Inputs = {
   taskTitle: string;
@@ -47,7 +47,11 @@ const TaskFrom: React.FC<ProTypes> = (props) => {
             <button type="submit" className={styles.submit_button}>
               Submit
             </button>
-            <button type="button" className={styles.cancel_button}>
+            <button
+              type="button"
+              className={styles.cancel_button}
+              onClick={() => dispatch(handleModalOpen(false))}
+            >
               Cancel
             </button>
           </div>
