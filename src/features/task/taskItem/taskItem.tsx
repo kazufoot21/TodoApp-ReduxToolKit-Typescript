@@ -8,7 +8,12 @@ import Modal from '@mui/material/Modal';
 
 import styles from './taskItem.module.scss';
 import TaskFrom from '../taskForm/TaskFrom';
-import { selectIsModalOpen, handleModalOpen, selectTask } from '../taskSlice';
+import {
+  selectIsModalOpen,
+  handleModalOpen,
+  selectTask,
+  completeTask,
+} from '../taskSlice';
 
 interface PropTypes {
   task: {
@@ -40,7 +45,7 @@ const TaskItem: React.FC<PropTypes> = (props) => {
         <Checkbox
           checked={task.completed}
           onClick={() => {
-            console.log(`check${task.id}`);
+            dispatch(completeTask(task));
           }}
           className={styles.checkbox}
         />
