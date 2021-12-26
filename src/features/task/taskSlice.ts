@@ -83,6 +83,12 @@ export const taskSlice = createSlice({
       }
     },
 
+    //taskの削除
+    deleteTask: (state, action) => {
+      //指定したtask以外で新しくstate.tasksの配列を再作成している
+      state.tasks = state.tasks.filter((t) => t.id !== action.payload.id);
+    },
+
     // increment: (state) => {
     //   // Redux Toolkit allows us to write "mutating" logic in reducers. It
     //   // doesn't actually mutate the state because it uses the Immer library,
@@ -119,6 +125,7 @@ export const {
   handleModalOpen,
   editTask,
   completeTask,
+  deleteTask,
 } = taskSlice.actions;
 
 // The function below is called a selector and allows us to select a value from

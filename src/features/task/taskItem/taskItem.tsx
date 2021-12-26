@@ -13,6 +13,7 @@ import {
   handleModalOpen,
   selectTask,
   completeTask,
+  deleteTask,
 } from '../taskSlice';
 
 interface PropTypes {
@@ -55,9 +56,7 @@ const TaskItem: React.FC<PropTypes> = (props) => {
         </button>
 
         <button
-          onClick={() => {
-            console.log(`delete${task.id}`);
-          }}
+          onClick={() => dispatch(deleteTask(task))}
           className={styles.delete_button}
         >
           <DeleteIcon className={styles.icon} />
