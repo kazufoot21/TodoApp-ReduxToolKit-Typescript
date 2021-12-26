@@ -10,7 +10,7 @@ const Header: React.FC = () => {
       <AppBar position="static" className={styles.app_bar}>
         <Toolbar className={styles.tool_bar}>
           <Typography variant="h6" className={styles.title}>
-            Redux TookKit Todo
+            Redux ToolKit Todo
           </Typography>
         </Toolbar>
       </AppBar>
