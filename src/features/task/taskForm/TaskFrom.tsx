@@ -4,7 +4,12 @@ import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
 
 import styles from './TaskForm.module.scss';
-import { createTask, handleModalOpen, selectSelectedTask } from '../taskSlice';
+import {
+  createTask,
+  handleModalOpen,
+  selectSelectedTask,
+  editTask,
+} from '../taskSlice';
 
 type Inputs = {
   taskTitle: string;
@@ -25,7 +30,9 @@ const TaskFrom: React.FC<ProTypes> = (props) => {
   };
 
   const handleEdit = (data: Inputs) => {
-    console.log(data);
+    const sendData = { ...selectedTask, title: data.taskTitle };
+    dispatch(editTask(sendData));
+    dispatch(handleModalOpen(false));
   };
   return (
     <div className={styles.root}>

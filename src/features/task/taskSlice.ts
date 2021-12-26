@@ -1,5 +1,6 @@
 import { StarTwoTone } from '@mui/icons-material';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { strictEqual } from 'assert';
 import { RootState, AppThunk } from '../../app/store';
 // import { fetchCount } from './counterAPI';
 
@@ -52,6 +53,16 @@ export const taskSlice = createSlice({
       state.tasks = [newTask, ...state.tasks];
     },
 
+    //taskの編集
+    editTask: (state, action) => {
+      //state.tasksの中から指定したtaskを抜き出している
+      const task = state.tasks.find((t) => t.id === action.payload.id);
+      if (task) {
+        //抜き出したtaskのtitleを置き換える
+        task.title = action.payload.title;
+      }
+    },
+
     //どのタスクを選択しているか管理
     selectTask: (state, action) => {
       state.selectedTask = action.payload;
@@ -92,7 +103,8 @@ export const taskSlice = createSlice({
   // },
 });
 
-export const { createTask, selectTask, handleModalOpen } = taskSlice.actions;
+export const { createTask, selectTask, handleModalOpen, editTask } =
+  taskSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
