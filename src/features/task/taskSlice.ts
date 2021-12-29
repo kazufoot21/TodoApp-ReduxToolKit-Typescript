@@ -2,25 +2,44 @@ import { StarTwoTone } from '@mui/icons-material';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { strictEqual } from 'assert';
 import { RootState, AppThunk } from '../../app/store';
+import { db } from '../../firebase';
 // import { fetchCount } from './counterAPI';
 
 export interface TaskState {
   //taskが何個あるのか管理
   idCount: number;
   //storeに保存するtask一覧
-  tasks: { id: number; title: string; completed: boolean }[];
+  tasks: { id: string; title: string; completed: boolean }[];
   //taskのtitleを編集する際にどのtaskが選択されているか
-  selectedTask: { id: number; title: string; completed: boolean };
+  selectedTask: { id: string; title: string; completed: boolean };
   //Modalが開くか閉じるかのフラグ
   isModalOpen: boolean;
 }
 
 const initialState: TaskState = {
   idCount: 1,
-  tasks: [{ id: 1, title: 'Task A', completed: false }],
-  selectedTask: { id: 0, title: '', completed: false },
+  tasks: [],
+  selectedTask: { id: '', title: '', completed: false },
   isModalOpen: false,
 };
+
+/*============================================
+taskの全件取得
+============================================*/
+export const fetchTasks = createAsyncThunk('task/getAllTasks', async () => {
+  //日付の降順にデータをソートしてtaskのデータを全件取得
+  const res = await db.collection('tasks').orderBy('dateTime', 'desc').get();
+
+  //レスポンスの整形
+  const allTasks = res.docs.map((doc) => ({
+    id: doc.id,
+    title: doc.data().title,
+    completed: doc.data().completed,
+  }));
+  const taskNumber = allTasks.length;
+  const passData = { allTasks, taskNumber };
+  return passData;
+});
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
