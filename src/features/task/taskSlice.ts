@@ -136,6 +136,14 @@ export const taskSlice = createSlice({
   //       state.value += action.payload;
   //     });
   // },
+  extraReducers: (builder) => {
+    //stateとactionの型が正しく推論されるためにbuilder関数を用いる
+    builder.addCase(fetchTasks.fulfilled, (state, action) => {
+      //action.payload === return passData
+      state.tasks = action.payload.allTasks;
+      state.idCount = action.payload.taskNumber;
+    });
+  },
 });
 
 export const {

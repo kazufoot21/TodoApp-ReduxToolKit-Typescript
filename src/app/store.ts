@@ -17,3 +17,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+
+//dispatch関数の型注釈として使用するため
+export type AppDispatch = typeof store.dispatch;
